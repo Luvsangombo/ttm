@@ -46,7 +46,6 @@ class LoginData with ChangeNotifier{
     String url = 'http://uconnect.smarterp.mn/uconnect?name='+base64Str+'&versioncode=9';
     print(url);
     final response = await http.post(url);
-
     this.data = new Login.fromJson(response.body);
 
     notifyListeners();
@@ -82,16 +81,19 @@ class LoginData with ChangeNotifier{
     );
     //Амжилттай хадгалсан үед success гэж ирнэ. success -ээс өөр утга ирвэл алдааны мэдээлэл байна.
     if(response.body=="success"){
-       data.userInfo.ovog=ovog;
-       data.userInfo.ner=ner;
-       data.userInfo.registr=registr;
-       data.userInfo.gender=gender;
-       data.userInfo.ajilNer=ajilNer;
-       data.userInfo.ajilAlbantushaal=ajilAlbantushaal;
-       data.userInfo.utas=utas;
-       data.userInfo.editEmail=editEmail;
+       this.data.userInfo.ovog=ovog;
+       this.data.userInfo.ner=ner;
+       this.data.userInfo.registr=registr;
+       this.data.userInfo.gender=gender;
+       this.data.userInfo.ajilNer=ajilNer;
+       this.data.userInfo.ajilAlbantushaal=ajilAlbantushaal;
+       this.data.userInfo.utas=utas;
+       this.data.userInfo.editEmail=editEmail;
     }
+    print(data.userInfo.utas);
+    print(response.body);
     return response.body;
+
   }
 
 }

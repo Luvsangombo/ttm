@@ -5,6 +5,7 @@ import 'package:ttm/screens/VoterInfo.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:ttm/provider/uconnect.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -14,16 +15,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   static final FacebookLogin facebookSignIn = new FacebookLogin();
+  @override
+  void initState() {
+    super.initState();
 
+  }
   Future<Null> _logOut() async {
     await facebookSignIn.logOut();
     Navigator.of(context).pushNamed(LoginScreen.routeName);
   }
 
   Widget build(BuildContext context) {
-    Login a= Provider.of<LoginData>(context).data;
+    Login a = Provider.of<LoginData>(context).data;
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
@@ -32,10 +36,10 @@ class _HomePageState extends State<HomePage> {
         drawer: Drawer(
           child: Column(
             children: <Widget>[
-              Container(
-                  height: 200,
-                  child: Image.asset('/assets/images/logo50.png')),
-              Text(a.userInfo.customerName, style: TextStyle(
+//              Container(
+//                  height: 200,
+//                  child: Image.asset('/assets/images/logo50.png')),
+              Text(a.userInfo.facebookId, style: TextStyle(
                 fontSize: 14,
                 color: Colors.redAccent,
                 fontWeight: FontWeight.bold,
@@ -72,6 +76,20 @@ class _HomePageState extends State<HomePage> {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              CircleAvatar(
+                backgroundImage: NetworkImage('http://uconnect.smarterp.mn/uploads/customers/'+a.userInfo.img),
+                radius: 75,
+              ),
+              Text(a.userInfo.customerName),
+              if(a.userInfo.utas!=null)
+              Text(a.userInfo.utas),
+              if(a.userInfo.ajilAlbantushaal!=null)
+              Text(a.userInfo.ajilAlbantushaal),
+              QrImage(
+                data: a.userInfo.facebookId,
+                version: QrVersions.auto,
+                size: 150.0,
+              ),
               new RaisedButton(
                 onPressed:(){
                   Navigator.of(context).pushNamed(LoginScreen.routeName);

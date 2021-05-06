@@ -4,7 +4,10 @@ import 'package:ttm/screens/HomePage.dart';
 import 'package:provider/provider.dart';
 import 'package:ttm/provider/uconnect.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'dart:convert';
+
+import 'package:ttm/screens/MyInfo.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -42,7 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
             profile['first_name'],
             profile['last_name']
         );
-        Navigator.of(context).pushNamed(HomePage.routeName);
+        if( Provider.of<LoginData>(context, listen: false).data.userInfo.ovog!=null){
+        Navigator.of(context).pushNamed(HomePage.routeName);}
+        else  Navigator.of(context).pushNamed(MyInfo.routeName);
         break;
 
       case FacebookLoginStatus.cancelledByUser:
@@ -64,18 +69,20 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('LoginPage'),
-        ),
         body: new Center(
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              CircleAvatar(
+              backgroundImage: AssetImage('android/app/src/main/res/drawable/logo.jpg'),
+              radius: 200,),
               new Text(_message),
-              new RaisedButton(
+              SignInButton(
+                Buttons.FacebookNew,
+                text: 'Facebook-ээр нэвтрэх',
                 onPressed: _login,
-                child: new Text('Facebook-ээр нэвтрэх'),
-              ),
+              )
+
             ],
           ),
         ),

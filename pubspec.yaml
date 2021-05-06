@@ -40,7 +40,8 @@ dev_dependencies:
   flutter_facebook_login: ^3.0.0
   http: ^0.12.0
   crypto: ^2.1.4
-
+  qr_flutter: 3.2.0
+  flutter_signin_button: ^1.1.0
 # The following section is specific to Flutter.
 flutter:
 
@@ -50,8 +51,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - android/app/src/main/res/drawable/logo.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

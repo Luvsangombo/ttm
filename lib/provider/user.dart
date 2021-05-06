@@ -10,6 +10,7 @@ class UserInfo{
   String utas;
   String editEmail;
   String facebookId;
+  String img;
 
   UserInfo.fromJson(Map<String, dynamic> jsonMap) {
     this.customerName = jsonMap['customer_name'];
@@ -23,5 +24,6 @@ class UserInfo{
     this.utas = jsonMap['utas'];
     this.editEmail = jsonMap['edit_email'];
     this.facebookId = jsonMap['facebook_id'];
+    this.img=jsonMap['img'];
   }
 }

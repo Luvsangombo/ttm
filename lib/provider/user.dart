@@ -11,7 +11,7 @@ class UserInfo{
   String editEmail;
   String facebookId;
   String img;
-
+  UserInfo();
   UserInfo.fromJson(Map<String, dynamic> jsonMap) {
     this.customerName = jsonMap['customer_name'];
     this.ovog = jsonMap['ovog'];

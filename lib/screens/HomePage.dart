@@ -29,8 +29,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Login a = Provider.of<LoginData>(context).data;
     return new MaterialApp(
+
       home: new Scaffold(
+        backgroundColor: Colors.teal,
         appBar: new AppBar(
+          backgroundColor: Colors.teal,
           title: new Text('HomePage'),
         ),
         drawer: Drawer(
@@ -72,33 +75,138 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: new Center(
-          child: new Column(
+        body:SafeArea(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircleAvatar(
+          CircleAvatar(
                 backgroundImage: NetworkImage('http://uconnect.smarterp.mn/uploads/customers/'+a.userInfo.img),
                 radius: 75,
               ),
-              Text(a.userInfo.customerName),
-              if(a.userInfo.utas!=null)
-              Text(a.userInfo.utas),
-              if(a.userInfo.ajilAlbantushaal!=null)
-              Text(a.userInfo.ajilAlbantushaal),
-              QrImage(
+              Text(a.userInfo.ner,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40.0,
+                    fontFamily: 'Pacifico',
+                  )),
+              Text(a.userInfo.ovog,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontFamily: 'SourceSansPro',
+                    letterSpacing: 2.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              SizedBox(height: 20,
+                width: 150.0,
+                child: Divider(color: Colors.teal.shade100),),
+              Card(
+                  color:Colors.white,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0,),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.phone,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          a.userInfo.utas,
+                          style: TextStyle(
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 20.0,
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+              Card(
+                  color:Colors.white,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0,),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.recent_actors,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          a.userInfo.registr,
+                          style: TextStyle(
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 20.0,
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+              if(a.userInfo.ajilNer!=null)
+              Card(
+                  color:Colors.white,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0,),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.work,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          a.userInfo.ajilNer,
+                          style: TextStyle(
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 20.0,
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+                            QrImage(
                 data: a.userInfo.facebookId,
                 version: QrVersions.auto,
                 size: 150.0,
               ),
-              new RaisedButton(
-                onPressed:(){
-                  Navigator.of(context).pushNamed(LoginScreen.routeName);
-                },
-                child: new Text('HomePage'),
-              ),
             ],
           ),
         ),
+//        new Center(
+//          child: new Column(
+//            mainAxisAlignment: MainAxisAlignment.center,
+//            children: <Widget>[
+//              CircleAvatar(
+//                backgroundImage: NetworkImage('http://uconnect.smarterp.mn/uploads/customers/'+a.userInfo.img),
+//                radius: 75,
+//              ),
+//
+//              Text(a.userInfo.customerName),
+//              if(a.userInfo.utas!=null)
+//              Text(a.userInfo.utas),
+//              if(a.userInfo.ajilAlbantushaal!=null)
+//              Text(a.userInfo.ajilAlbantushaal),
+//              QrImage(
+//                data: a.userInfo.facebookId,
+//                version: QrVersions.auto,
+//                size: 150.0,
+//              ),
+//              new RaisedButton(
+//                onPressed:(){
+//                  Navigator.of(context).pushNamed(LoginScreen.routeName);
+//                },
+//                child: new Text('HomePage'),
+//              ),
+//            ],
+//          ),
+//        ),
       ),
     );
   }

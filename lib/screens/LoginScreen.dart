@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CircleAvatar(
-              backgroundImage: AssetImage('android/app/src/main/res/drawable/logo.jpg'),
+              backgroundImage: AssetImage('android/app/src/main/res/drawable/screen.jpg'),
               radius: 200,),
               new Text(_message),
               SignInButton(

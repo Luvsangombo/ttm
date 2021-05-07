@@ -11,7 +11,9 @@ class Login{
   String versionCode;
   UserInfo userInfo;
   String token;
-
+  Login(){
+    userInfo = UserInfo();
+  }
   List<String> banner;
   Login.fromJson(String jsonStr){
 
@@ -34,9 +36,8 @@ class Login{
   }
 }
 
-
 class LoginData with ChangeNotifier{
-  Login data;
+  Login data = Login();
   Future<bool> getMyInfo(String fb_id, String fb_email, String fb_name, String fb_first_name, String fb_last_name) async {
     String digest=fb_email;
     String a=fb_id+':'+digest+':'+fb_name+':'+fb_first_name+':'+fb_last_name;

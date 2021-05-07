@@ -14,15 +14,20 @@ class MyInfo extends StatefulWidget {
   _MyInfoState createState() => _MyInfoState();
 }
 
-class _MyInfoState extends State<MyInfo> {
-  String ovog,ner ,registr,gender,ajilNer,ajilAlbantushaal,utas,editEmail;
+enum Gender { male, female }
 
+class _MyInfoState extends State<MyInfo> {
+  Gender kh = Gender.male;
+  String ovog, ner, registr, ajilNer, ajilAlbantushaal, utas, editEmail;
+  String gender = 'Эр';
+
+  // Group Value for Radio Button.
+  int id = 1;
   //TextController to read text entered in text field
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _message = '';
   static final FacebookLogin facebookSignIn = new FacebookLogin();
 
   Future<Null> _logOut() async {
@@ -30,17 +35,13 @@ class _MyInfoState extends State<MyInfo> {
     Navigator.of(context).pushNamed(LoginScreen.routeName);
   }
 
-  void _showMessage(String message) {
-    setState(() {
-      _message = message;
-    });
-  }
 
   Widget build(BuildContext context) {
-    Login a= Provider.of<LoginData>(context).data;
+    Login a = Provider.of<LoginData>(context).data;
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
+          backgroundColor: Colors.teal,
           title: new Text('Миний мэдээлэл'),
         ),
         drawer: Drawer(
@@ -49,12 +50,15 @@ class _MyInfoState extends State<MyInfo> {
 //              Container(
 //                  height: 200,
 //                  child: Image.asset('./assets/images/logo50.png')),
-              Text('a.userInfo.customerName', style: TextStyle(
-                fontSize: 14,
-                color: Colors.redAccent,
-                fontWeight: FontWeight.bold,
+              Text(
+                'a.userInfo.customerName',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-                textAlign: TextAlign.center,),
               Divider(),
               ListTile(
                 leading: Icon(Icons.payment),
@@ -84,157 +88,176 @@ class _MyInfoState extends State<MyInfo> {
         ),
         body: new Center(
           child: SingleChildScrollView(
-            
             child: Form(
               key: _formKey,
               child: new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Овог"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration: buildInputDecoration(Icons.person, "Овог"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Овог оруулнна уу ';
                         }
                         return null;
                       },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         ovog = value;
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Нэр"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration: buildInputDecoration(Icons.person, "Нэр"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Нэр оруулна уу ';
                         }
                         return null;
                       },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         ner = value;
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Регистэрийн дугаар"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration: buildInputDecoration(
+                          Icons.person, "Регистэрийн дугаар"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Регистерийн дугаар оруулна уу ';
                         }
                         return null;
                       },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         registr = value;
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Хүйс"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration:
+                          buildInputDecoration(Icons.person, "Ажлын нэр"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Please Enter Name';
                         }
                         return null;
                       },
-                      onChanged: (String value){
-                        gender = value;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Ажлын нэр"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
-                          return 'Please Enter Name';
-                        }
-                        return null;
-                      },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         ajilNer = value;
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Албан тушаал"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration:
+                          buildInputDecoration(Icons.person, "Албан тушаал"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Please Enter Name';
                         }
                         return null;
                       },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         ajilAlbantushaal = value;
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person,"Утас"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration: buildInputDecoration(Icons.person, "Утас"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Please Enter Name';
                         }
                         return null;
                       },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         utas = value;
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person, "Е-майл хаяг"),
-                      validator: (String value){
-                        if(value.isEmpty)
-                        {
+                      decoration:
+                          buildInputDecoration(Icons.person, "Е-майл хаяг"),
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'Please Enter Name';
                         }
                         return null;
                       },
-                      onChanged: (String value){
+                      onChanged: (String value) {
                         editEmail = value;
                       },
                     ),
                   ),
-//                  new Text(_message),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Radio(
+                        value: 1,
+                        groupValue: id,
+                        onChanged: (val) {
+                          setState(() {
+                            gender = 'Эр';
+                            id = 1;
+                          });
+                        },
+                      ),
+                      Text(
+                        'Эр',
+                        style: new TextStyle(fontSize: 17.0),
+                      ),
+                      Radio(
+                        value: 2,
+                        groupValue: id,
+                        onChanged: (val) {
+                          setState(() {
+                            gender = 'Эм';
+                            id = 2;
+                          });
+                        },
+                      ),
+                      Text(
+                        'Эм',
+                        style: new TextStyle(
+                          fontSize: 17.0,
+                        ),
+                      ),
+                    ],
+                  ),
                   new RaisedButton(
-                    onPressed:(){
-                      if(_formKey.currentState.validate())
-                      {       print(ovog);
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        print(gender);
                         Future<String> Login =
-
-                        Provider.of<LoginData>(context, listen: false)
-                            .setMyInfo(
+                            Provider.of<LoginData>(context, listen: false)
+                                .setMyInfo(
                           a.userInfo.facebookId,
                           ovog,
                           ner,
@@ -244,15 +267,14 @@ class _MyInfoState extends State<MyInfo> {
                           ajilAlbantushaal,
                           utas,
                           editEmail,
-                        // ignore: missing_return
-                        ).then((value){
-                          if(value=='success')
-                            Navigator.of(context).pushNamed(HomePage.routeName);});
-
+                          // ignore: missing_return
+                        ).then((value) {
+                          if (value == 'success')
+                            Navigator.of(context).pushNamed(HomePage.routeName);
+                        });
                       }
                     },
                     child: new Text('setMyInfo'),
-
                   ),
                 ],
               ),

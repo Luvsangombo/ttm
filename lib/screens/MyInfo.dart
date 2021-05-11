@@ -133,7 +133,7 @@ class _MyInfoState extends State<MyInfo> {
                     child: TextFormField(
                       keyboardType: TextInputType.text,
                       decoration: buildInputDecoration(
-                          Icons.person, "Регистэрийн дугаар"),
+                          Icons.perm_identity, "Регистэрийн дугаар"),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Регистерийн дугаар оруулна уу ';
@@ -151,7 +151,7 @@ class _MyInfoState extends State<MyInfo> {
                     child: TextFormField(
                       keyboardType: TextInputType.text,
                       decoration:
-                          buildInputDecoration(Icons.person, "Ажлын нэр"),
+                          buildInputDecoration(Icons.work, "Ажлын нэр"),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please Enter Name';
@@ -169,7 +169,7 @@ class _MyInfoState extends State<MyInfo> {
                     child: TextFormField(
                       keyboardType: TextInputType.text,
                       decoration:
-                          buildInputDecoration(Icons.person, "Албан тушаал"),
+                          buildInputDecoration(Icons.format_indent_decrease, "Албан тушаал"),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please Enter Name';
@@ -186,7 +186,7 @@ class _MyInfoState extends State<MyInfo> {
                         const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.text,
-                      decoration: buildInputDecoration(Icons.person, "Утас"),
+                      decoration: buildInputDecoration(Icons.phone, "Утас"),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please Enter Name';
@@ -204,7 +204,7 @@ class _MyInfoState extends State<MyInfo> {
                     child: TextFormField(
                       keyboardType: TextInputType.text,
                       decoration:
-                          buildInputDecoration(Icons.person, "Е-майл хаяг"),
+                          buildInputDecoration(Icons.email, "Е-майл хаяг"),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please Enter Name';
@@ -252,6 +252,7 @@ class _MyInfoState extends State<MyInfo> {
                     ],
                   ),
                   new RaisedButton(
+                    color: Colors.teal,
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         print(gender);
@@ -274,7 +275,7 @@ class _MyInfoState extends State<MyInfo> {
                         });
                       }
                     },
-                    child: new Text('setMyInfo'),
+                    child: new Text('Хадгалах'),
                   ),
                 ],
               ),
